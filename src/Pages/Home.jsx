@@ -1,8 +1,30 @@
+import {readRequest} from "../ApiRequest/ApiRequest.js";
+import {useEffect, useState} from "react";
 
 const Home = () => {
+  const [data, setData] = useState([]);
+  useEffect(()=>{
+    (async ()=>{
+      let res = await readRequest()
+      setData(res)
+    })()
+  })
   return (
     <div>
-      <h1>Home page</h1>
+      <ul>
+        {
+          data.map((item,i)=>{
+            return(
+                <li key= {i} >
+                  {
+                    item.ProductName
+                  }
+                </li>
+            )
+          })
+        }
+      </ul>
+
     </div>
   )
 }
